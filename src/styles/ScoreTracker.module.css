@@ -1,0 +1,26 @@
+.scoreTracker {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background-color: #0f1923;
+  border-bottom: 3px solid #ff4655;
+  color: #ece8e1;
+  font-family: "Valorant", sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.currentScore,
+.bestScore {
+  text-transform: uppercase;
+}
+
+.currentScore {
+  color: #ff4655;
+}
+
+.bestScore {
+  color: #fd4556;
+}
