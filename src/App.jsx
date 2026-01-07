@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Heading from "./components/Heading";
 import ScoreTracker from "./components/ScoreTracker";
 import CardGrid from "./components/CardGrid";
-import agentsData from "./data/agents";
 import "./App.css";
 
 function App() {
@@ -10,45 +9,58 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [clickedAgents, setClickedAgents] = useState([]);
   const [agents, setAgents] = useState([]);
+  const [displayAgents, setDisplayAgents] = useState([]);
 
-  const shuffleAgents = (agentsArray) => {
-    return [...agentsArray].sort(() => Math.random() - 0.5);
-  };
+  const shuffleAgents = (array) => [...array].sort(() => Math.random() - 0.5);
 
+  // Fetch real agents from Valorant API
   useEffect(() => {
-    setAgents(shuffleAgents(agentsData));
+    fetch("https://valorant-api.com/v1/agents?isPlayableCharacter=true")
+      .then((res) => res.json())
+      .then((data) => {
+        const formatted = data.data.map((agent) => ({
+          id: agent.uuid,
+          name: agent.displayName,
+          image: agent.fullPortraitV2 || agent.fullPortrait || "",
+        }));
+        setAgents(formatted);
+        setDisplayAgents(shuffleAgents(formatted));
+      })
+      .catch((err) => console.error("API fetch failed:", err));
   }, []);
 
+  // Handle card click
   const handleCardClick = (agent) => {
     if (clickedAgents.includes(agent.id)) {
-      //agent clicked already
+      // Lose
       setCurrentScore(0);
       setClickedAgents([]);
-      console.log("agent already clicked, game reset");
+      console.log("Repeat click! Game reset.");
     } else {
-      //new agent clicked
+      // Good click
       const newClicked = [...clickedAgents, agent.id];
       setClickedAgents(newClicked);
-      const newScore = newClicked.length;
-      setCurrentScore(newScore);
+      setCurrentScore(newClicked.length);
 
-      if (newScore > bestScore) {
-        setBestScore(newScore);
-        console.log(`new best score ${bestScore}`);
+      if (newClicked.length > bestScore) {
+        setBestScore(newClicked.length);
       }
 
-      console.log(`new agent selected, cur score ${newScore}`);
+      // Win check
+      if (newClicked.length === agents.length) {
+        console.log("You Win! All agents remembered!");
+      }
     }
 
-    //shuffle after every click
-    setAgents(shuffleAgents(agents));
+    // Shuffle after every click
+    setDisplayAgents(shuffleAgents(agents));
   };
 
   return (
     <>
       <Heading />
       <ScoreTracker currentScore={currentScore} bestScore={bestScore} />
-      <CardGrid agents={agents} onCardClick={handleCardClick} />
+      <CardGrid agents={displayAgents} onCardClick={handleCardClick} />
     </>
   );
 }
