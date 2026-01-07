@@ -1,16 +1,23 @@
-# React + Vite
+# Valorant Memory Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and challenging memory game built with React (Vite) featuring all playable Valorant agents. Test your memory by clicking each agent only once — repeat any agent and your score resets!
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**[Play the game here](https://odin-valorant-memory-game.vercel.app/)**
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Real-time agent data and portraits fetched from the Valorant API
+- Dynamic card shuffling after every click
+- Current score and persistent best score tracking
+- Clean Valorant-themed dark UI with iconic red accents
+- Victory modal when you successfully remember all agents
 
-## Expanding the ESLint configuration
+## How to Play
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Click on an agent to begin
+2. Remember which agents you've already clicked
+3. Try to click every unique agent without repeating
+4. Repeat an agent → score resets to 0
+5. Click all agents correctly → **YOU WIN!**
