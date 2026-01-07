@@ -23,7 +23,11 @@ function App() {
         const formatted = data.data.map((agent) => ({
           id: agent.uuid,
           name: agent.displayName,
-          image: agent.fullPortraitV2 || agent.fullPortrait || "",
+          image:
+            agent.displayIcon ||
+            agent.fullPortraitV2 ||
+            agent.fullPortrait ||
+            "",
         }));
         setAgents(formatted);
         setDisplayAgents(shuffleAgents(formatted));
