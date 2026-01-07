@@ -1,0 +1,50 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  backdrop-filter: blur(12px); /* ← Blurs the game behind */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #1e252e;
+  border: 6px solid #ff4655; /* Valorant red border */
+  border-radius: 20px;
+  padding: 4rem 6rem;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.modal h2 {
+  font-size: 5.5rem;
+  color: #ff4655;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.resetButton {
+  margin-top: 2.5rem;
+  background-color: #ff4655;
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.resetButton:hover {
+  background-color: #fd4556;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Heading from "./components/Heading";
 import ScoreTracker from "./components/ScoreTracker";
 import CardGrid from "./components/CardGrid";
+import WinModal from "./components/WinModal";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [clickedAgents, setClickedAgents] = useState([]);
   const [agents, setAgents] = useState([]);
   const [displayAgents, setDisplayAgents] = useState([]);
+  const [showWinModal, setShowWinModal] = useState(false);
 
   const shuffleAgents = (array) => [...array].sort(() => Math.random() - 0.5);
 
@@ -48,6 +50,7 @@ function App() {
 
       // Win check
       if (newClicked.length === agents.length) {
+        setShowWinModal(true);
         console.log("You Win! All agents remembered!");
       }
     }
@@ -56,11 +59,20 @@ function App() {
     setDisplayAgents(shuffleAgents(agents));
   };
 
+  //Reset Game after win
+  const resetGameAfterWin = () => {
+    setShowWinModal(false);
+    setCurrentScore(0);
+    setClickedAgents([]);
+    setDisplayAgents(shuffleAgents(agents));
+  };
+
   return (
     <>
       <Heading />
       <ScoreTracker currentScore={currentScore} bestScore={bestScore} />
       <CardGrid agents={displayAgents} onCardClick={handleCardClick} />
+      <WinModal isOpen={showWinModal} onReset={resetGameAfterWin} />
     </>
   );
 }
